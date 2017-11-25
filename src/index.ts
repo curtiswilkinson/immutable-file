@@ -1,15 +1,21 @@
 #!/usr/bin/env node
 import * as cli from 'cli'
+import * as fs from 'mz/fs'
 import * as path from 'path'
 const stagedGit = require('staged-git-files')
 
 import Config from './config'
 import Utils from './utils'
+import Glob from './glob'
 
 const flags = {
 	file: ['f', 'A path to the file being locked', 'file'],
 	init: ['i', 'Creates an immutable-file.json in the current path', 'bool'],
-	glob: [false, 'Dictates whether or not to preserve globs', 'bool']
+	glob: [
+		'g',
+		'allows you provide a glob, all files paths matching will be made immutable',
+		'string'
+	]
 } as any
 
 interface StagedFile {
@@ -19,17 +25,19 @@ interface StagedFile {
 
 const main = async () => {
 	const options = cli.parse(flags)
-	const config = await Config.read()
 
 	if (options.init) {
 		return await Config.write({ error: '', lock: [] })
 	}
 
+	const config = await Config.read()
+
+	if (options.glob) {
+		return Glob(config, options.glob)
+	}
+
 	if (options.file) {
-		return await Config.write({
-			...config,
-			lock: Array.from(new Set([...config.lock, options.file]))
-		})
+		return await Config.add(config, options.file)
 	}
 
 	stagedGit('', (err: Error, files: Array<StagedFile>) => {
