@@ -18,7 +18,7 @@ const immutable = (immutablePaths: string[]) => {
 	const formattedImmutable = formatPaths(immutablePaths)
 
 	console.log(
-		chalk.bold.cyan('The following Paths have been added as immutable: \n\n') +
+		chalk.bold.cyan('The following Paths have been marked as immutable: \n\n') +
 			formattedImmutable
 	)
 }

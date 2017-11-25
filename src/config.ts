@@ -1,5 +1,7 @@
 import * as fs from 'mz/fs'
 import * as path from 'path'
+import Output from './output'
+
 export interface Config {
 	error: string
 	lock: string[]
@@ -31,7 +33,7 @@ const add = (config: Config, newImmutable: string | string[]) => {
 	return write({
 		...config,
 		lock: Array.from(new Set([...config.lock, ...newLockedFilesArray]))
-	})
+	}).then(() => Output.immutable(newLockedFilesArray))
 }
 
 export default { read, write, resolvePaths, add }
