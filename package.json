@@ -1,6 +1,6 @@
 {
   "name": "immutable-file",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A tool to audit your commits and ensurce some files are immutable",
   "main": "build/index.js",
   "bin": {
