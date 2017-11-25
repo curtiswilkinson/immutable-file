@@ -2,11 +2,11 @@
 import * as cli from 'cli'
 import * as fs from 'mz/fs'
 import * as path from 'path'
-const stagedGit = require('staged-git-files')
 
 import Config from './config'
 import Utils from './utils'
 import Glob from './glob'
+import Immutable from './immutable'
 
 const flags = {
 	file: ['f', 'A path to the file being locked', 'file'],
@@ -17,11 +17,6 @@ const flags = {
 		'string'
 	]
 } as any
-
-interface StagedFile {
-	filename: string // actually a path, lol,
-	status: string
-}
 
 const main = async () => {
 	const options = cli.parse(flags)
@@ -40,20 +35,7 @@ const main = async () => {
 		return await Config.add(config, options.file)
 	}
 
-	stagedGit('', (err: Error, files: Array<StagedFile>) => {
-		const modifiedFiles = files.map(file => path.resolve(file.filename))
-		const auditResult = Utils.audit(
-			modifiedFiles,
-			Config.resolvePaths(config).lock
-		)
-
-		if (auditResult) {
-			return process.exit(0)
-		}
-
-		console.error(config.error)
-		return process.exit(1)
-	})
+	return Immutable(config)
 }
 
 main()
