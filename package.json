@@ -17,7 +17,6 @@
   "dependencies": {
     "cli": "^1.0.1",
     "glob": "^7.1.2",
-    "glob-fs": "^0.1.7",
     "mz": "^2.7.0",
     "staged-git-files": "^0.0.4"
   },
