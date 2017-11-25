@@ -1,0 +1,38 @@
+{
+  "name": "immutable-file",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "bin": {
+    "immutable-file": "build/index.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "build": "tsc",
+    "prepublish": "npm run test && npm run build"
+  },
+  "author": "Curtis Wilkinson",
+  "license": "MIT",
+  "dependencies": {
+    "cli": "^1.0.1",
+    "mz": "^2.7.0",
+    "simple-git": "^1.82.0",
+    "staged-git-files": "^0.0.4"
+  },
+  "devDependencies": {
+    "@types/cli": "^0.11.19",
+    "@types/jest": "^21.1.8",
+    "@types/mz": "^0.0.32",
+    "@types/node": "^8.0.53",
+    "jest": "^21.2.1",
+    "typescript": "^2.6.1"
+  },
+  "jest": {
+    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/jest/typescript.js"
+    },
+    "testMatch": ["**/src/*.spec.(ts|tsx|js)"]
+  }
+}
