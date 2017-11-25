@@ -1,6 +1,6 @@
 import * as fs from 'mz/fs'
 import * as path from 'path'
-interface Config {
+export interface Config {
 	error: string
 	lock: string[]
 }
@@ -23,4 +23,15 @@ const read = () =>
 const write = (config: Config) =>
 	fs.writeFile(configPath, JSON.stringify(config, null, 2))
 
-export default { read, write, resolvePaths }
+const add = (config: Config, newImmutable: string | string[]) => {
+	const newLockedFilesArray = Array.isArray(newImmutable)
+		? newImmutable
+		: [newImmutable]
+
+	return write({
+		...config,
+		lock: Array.from(new Set([...config.lock, ...newLockedFilesArray]))
+	})
+}
+
+export default { read, write, resolvePaths, add }
