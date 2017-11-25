@@ -1,8 +1,7 @@
 {
   "name": "immutable-file",
-  "version": "1.0.0",
-  "description":
-    "A tool to audit your commits and ensurce some files are immutable",
+  "version": "1.0.1",
+  "description": "A tool to audit your commits and ensurce some files are immutable",
   "main": "build/index.js",
   "bin": {
     "immutable-file": "build/index.js"
@@ -29,10 +28,16 @@
     "typescript": "^2.6.1"
   },
   "jest": {
-    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/jest/typescript.js"
     },
-    "testMatch": ["**/src/*.spec.(ts|tsx|js)"]
+    "testMatch": [
+      "**/src/*.spec.(ts|tsx|js)"
+    ]
   }
 }
