@@ -3,6 +3,7 @@ const stagedGit = require('staged-git-files')
 
 import Config, { Config as ConfigT } from './config'
 import Utils from './utils'
+import Output from './output'
 
 interface StagedFile {
 	filename: string // actually a path, lol,
@@ -17,11 +18,11 @@ export default (config: ConfigT) => {
 			Config.resolvePaths(config).lock
 		)
 
-		if (auditResult) {
+		if (!auditResult.length) {
 			return process.exit(0)
 		}
 
-		console.error(config.error)
+		Output.violation(config.error, auditResult)
 		return process.exit(1)
 	})
 }

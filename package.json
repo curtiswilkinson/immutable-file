@@ -10,17 +10,19 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "tsc",
-    "prepublish": "npm run test && npm run build"
+    "prepublishOnly": "npm run test && npm run build"
   },
   "author": "Curtis Wilkinson",
   "license": "MIT",
   "dependencies": {
+    "chalk": "2.1",
     "cli": "^1.0.1",
     "glob": "^7.1.2",
     "mz": "^2.7.0",
     "staged-git-files": "^0.0.4"
   },
   "devDependencies": {
+    "@types/chalk": "0.4",
     "@types/cli": "^0.11.19",
     "@types/glob": "^5.0.33",
     "@types/jest": "^21.1.8",
